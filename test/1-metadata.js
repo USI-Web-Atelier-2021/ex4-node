@@ -10,16 +10,21 @@ function run(cmd, cwd, done) {
 
     const exec = child_process.exec;
     exec(cmd, {cwd}, (err, stdout, stderr) => {
-        if (err) {
-            //some err occurred
-            console.error(err);
-        } else {
-            // the *entire* stdout and stderr (buffered)
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
-            if (typeof done == "function") {
-                done(err, stdout, stderr);
-            } else {}
+        fs.writeFile("./metadata.log", `${cmd}
+
+---- stdout ----
+
+${stdout}
+
+---- stderr ----
+
+${stderr}
+
+---- error ----
+
+${err && err.message}`);
+        if (typeof done == "function") {
+            done(err, stdout, stderr);
         }
     });
 
@@ -77,8 +82,8 @@ describe('Task 1: Testing Song Metadata Extractor', function() {
 
         fs.readdirSync("./test/assets").filter(f=>f.endsWith(".mp3")).forEach((i)=>{
             let {size} = fs.statSync("./test/assets/"+i);
-            let data = fs.readJSONSync("./test/data.json");
             it(`song "${i}" should have size ${size}`, function() {
+                let data = fs.readJSONSync("./test/data.json");
                 should(data.find(x=>x.filename == i).size).be.equal(size);
             });
         });

@@ -10,10 +10,7 @@ function run(cmd, cwd, done) {
 
     const exec = child_process.exec;
     return exec(cmd, { cwd }, (err, stdout, stderr) => {
-        //if (err) {
-            //some err occurred
-            //console.error(err);
-        //} else {
+
             fs.writeFile("./server.log", `${cmd}
 
 ---- stdout ----
@@ -22,11 +19,18 @@ ${stdout}
 
 ---- stderr ----
 
-${stderr}`);
+${stderr}
+
+---- error ----
+
+${err && err.message}
+
+Note: the "Command failed" error is expected
+      because the test will kill the server at the end`);
 
             if (typeof done == "function") {
                 done(err, stdout, stderr);
-            } else {}
+            }
         //}
     });
 
@@ -104,10 +108,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -163,10 +169,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -222,10 +230,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -281,10 +291,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -340,10 +352,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -399,10 +413,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -458,10 +474,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -517,10 +535,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -576,10 +596,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -635,10 +657,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -694,10 +718,12 @@ describe('Task 3: Testing Web Server', function() {
                         //check that the server returns the mp3 files linked from the page
                         mp3_links.forEach(mp3 => {
 
-                            console.log("GET /" + mp3);
+                            let url = ("/" + mp3).replace("//","/");
+
+                            console.log("GET " + url);
 
                             request
-                                .get("/"+mp3)
+                                .get(url)
                                 .send()
                                 .expect(200)
                                 .end((err, res) => {
@@ -724,15 +750,9 @@ describe('Task 3: Testing Web Server', function() {
 
     });
 
-    describe('GET audio src requests', function() {
-
-
-
-    });
-
     after("stop web server", function(done) {
 
-        setTimeout(()=>{this.server_proc.kill(); done()}, 500);
+        setTimeout(()=>{console.log("Attempting to stop the server"); this.server_proc.kill('SIGKILL'); done()}, 500);
 
     });
 
